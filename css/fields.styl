@@ -1,0 +1,116 @@
+
+
+
+.fieldBorderStyle
+  border-radius: 2px
+  border-top: 1px solid #bbb
+  border-right: 1px solid #ddd
+  border-bottom: 1px solid #ddd
+  border-left: 1px solid #ddd
+
+.fieldFontFamily
+  font-family: 'HelveticaNeueW01-67MdCn 692710', HelveticaNeue, Helvetica, Arial, sans-serif
+
+.fieldBgStyle
+  vbg-gradient(#eee, #fff)
+
+
+label
+button
+  // @extends .fieldFontFamily
+  text-transform: uppercase
+  line-height: 17px
+  font-smoothing: antialiased
+  user-select: none
+  display: block
+  color: #999
+  margin: 6px 0
+  font-size: 100%
+
+span.button
+  cursor: pointer
+  &:hover
+    color: white
+
+// ie fixes
+textarea
+  resize: none
+  &.vertical
+    resize: vertical
+  &.horizontal
+    resize: horizontal
+
+*:focus
+  outline: 0px
+
+.field.nex
+  box-sizing()
+  margin: 3px 0 10px 0
+  padding: 0 5px
+  position: relative
+
+  input
+  textarea
+    @extends .fieldBorderStyle
+    // @extends .fieldFontFamily
+    @extends .fieldBgStyle
+    font-size: 13px
+    padding: 6px 3px 4px 3px
+
+
+  input:focus
+  textarea:focus
+    box-shadow: 0 0 8px rgba(255,255,255,0.7)
+    background: white
+
+  input
+  textarea
+    width: 100%
+    box-sizing: border-box
+
+  div[contenteditable="true"]
+    -webkit-user-select: text
+
+  textarea
+    @extends .fieldBgStyle
+
+
+.field.nex.error
+  border-color: #E87D7D!important
+
+  label
+    color: #E87D7D!important
+
+    span
+      display: inline
+
+
+
+.nex.checkbox
+  // margin: 3px 0 10px 0
+  // padding: 0 5px
+  // position: relative
+  // background: none
+
+  &.center
+    text-align: center
+  &.left
+    text-align: left
+  &.right
+    text-align: right
+
+  input
+    float: left
+    // appearance: none
+    // color: lighten(black, 40%)
+    // text-shadow: 1px 1px 1px rgba(0,0,0,0.2)
+
+    // &:before
+    //   content: "\f096"
+
+  // input:checked
+  //   &:before
+  //     content: "\f046"
+
+  label
+    margin-left: 26px

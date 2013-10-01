@@ -1,0 +1,12 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "es5-shimify": "~2.0.5",
+    "json2ify": "~0.0.3",
+    "jqueryify": "https://github.com/Nex9/jqueryify/archive/1.10.2.tar.gz",
+    "spine": "~1.2.0",
+    "nex": "git+ssh://git@git.nex9.com/repo/nex"
+  }
+}
