@@ -9,7 +9,7 @@ require('spine/lib/manager')
 require('spine/lib/route')
 require('lib/touch')
 
-# require('lib/screenfull')
+require('lib/screenfull')
 
 require('nex')
 require('nex/lib/utils')
