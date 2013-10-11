@@ -10,7 +10,7 @@
     width: 100%
     height: 100%
     opacity: 0
-    transition: opacity 0.25s ease
+    // transition: opacity 0.25s ease
     background-repeat: no-repeat
 
   &.loaded
@@ -45,6 +45,11 @@
 
   video
     display: block
+
+  // video will always extend to 100% width and height
+  &.crop
+    width:  100%
+    height: 100%
 
   &.crop.top
     video
@@ -288,6 +293,7 @@
           bg-gradient(darken(white, 0%), darken(white, 20%))
 
 .imagovideo.playing
+  background: none
   .playbig
     opacity: 0
   .controls
@@ -349,104 +355,3 @@
     transform:rotate(0deg)
   100%
     transform:rotate(360deg)
-
-
-// slider
-.nexslider
-  position: relative
-  perspective: 3000
-
-  .slide
-    position: absolute
-    width: 100%
-    height: 100%
-    opacity: 0
-    > .imagoimage
-    > .imagovideo
-      width: 100%
-      height: 100%
-    > *
-      position: absolute
-
-  .slide.active
-      opacity: 1
-
-  .next
-  .prev
-    display:  block
-    width:  39px
-    height: 39px
-    border-top:    1px solid black
-    border-right:  1px solid black
-    position: absolute
-    z-index: 10
-    top: 50%
-    margin-top: -20px
-    transition: all .15s
-    cursor: pointer
-
-  .prev
-    left: -50px
-    transform: rotate(225deg)
-    &:hover
-      transform: scale(1.2) rotate(225deg)
-  .next
-    right: -50px
-    transform: rotate(45deg)
-    &:hover
-      transform: scale(1.2) rotate(45deg)
-
-
-
-// effects
-.nexslider.slide
-  .slide
-    transition: all .25s
-    transform: translateX(-100%)
-    opacity: 0
-
-  .slide.active
-    transform: translateX(0)
-    opacity: 1
-    z-index: 1
-
-  .slide.active ~ .slide
-    transform: translateX(100%)
-
-.nexslider.carousel
-  .slide
-    transition: all 0.35s
-    transform: scale(0) translateX(-200%) rotateY(180deg)
-    opacity: 0
-
-  .slide.active
-    transform: scale(1) translateX(0) rotateY(0deg)
-    opacity: 1
-    z-index: 1
-
-  .slide.active ~ .slide
-    transform: scale(0) translateX(200%) rotateY(-180deg)
-
-.nexslider.slidescale
-  .slide
-    transition: all .25s
-    transform: scale(0) translateX(-100%)
-    opacity: 0
-
-  .slide.active
-    transform: scale(1) translateX(0)
-    opacity: 1
-    z-index: 1
-
-  .slide.activ ~ .slide
-    transform: scale(0) translateX(100%)
-
-.nexslider.fade
-  .slide
-    transition: opacity .25s
-    opacity: 0
-    z-index: 0
-
-  .slide.active
-    opacity: 1
-    z-index: 1

@@ -1,3 +1,20 @@
+calc()
+  if current-property
+    add-property(current-property[0], s('-webkit-calc(%s)', arguments))
+    add-property(current-property[0], s('-moz-calc(%s)', arguments))
+    add-property(current-property[0], s('-ms-calc(%s)', arguments))
+    add-property(current-property[0], s('-o-calc(%s)', arguments))
+    s('calc(%s)', arguments)
+  else
+    error('something() must be used within a property')
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -ms-{prop} args
+  -o-{prop} args
+  {prop} args
+
 mp()
   padding: arguments
   margin: arguments
@@ -33,13 +50,13 @@ hbg-gradient(fc = #FFF, tc = #FFF)
   background: linear-gradient(left, fc, tc) no-repeat
 
 
-rbg-gradient(fc = #FFF, tc = #FFF, start=0%, end=100%, h=center, v=center)
+rbg-gradient(fc = #FFF, tc = #FFF, start = 0%, end = 100%, h = center, v = center)
   background: fc
-  background: -webkit-radial-gradient(h v, circle, fc start, tc end)
-  background: -moz-radial-gradient(h v, circle, fc start, tc end)
-  background: -ms-radial-gradient(h v, circle, fc start, tc end)
-  background: -o-radial-gradient(h v, circle, fc start, tc end)
-  background: radial-gradient(h v, circle, fc start, tc end)
+  background-image: -webkit-radial-gradient(h v, circle, fc start, tc end)
+  background-image: -moz-radial-gradient(h v, circle, fc start, tc end)
+  background-image: -ms-radial-gradient(h v, circle, fc start, tc end)
+  background-image: -o-radial-gradient(h v, circle, fc start, tc end)
+  background-image: radial-gradient(h v, circle, fc start, tc end)
 
 bg-gradient(o=center center, type=linear, fc=#FFF, tc=#FFF)
   background: fc

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ imago.settings('title', '') }}</title>
+
+  <!-- a nex9.com site -->
+
+  <link rel="icon" href="{{ imago.settings('icon') }}">
+  <link rel="stylesheet" href="/application.css?{{ handler.settings.get('cacheflushcounter') }}" type="text/css">
+
+<!--   <link href='http://fonts.googleapis.com/css?family=Rationale' rel='stylesheet' type='text/css'> -->
+
+  <meta name="description" content="{{ imago.settings('description', '') }}">
+  <meta name="keywrods"    content="{{ imago.settings('keywords', '') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta http-equiv="cleartype" content="on">
+
+  <!-- Facebook sharing meta -->
+  <meta property="og:image", content="{{ imago.settings('icon') }}=s256">
+
+  <meta property="og:title", content="{{ imago.settings('title', '') }}">
+  <meta property="og:description" content="{{ imago.settings('description', '') }}">
+  <meta property="og:url", content="http://{{ imago.settings('domain', '') }}/">
+
+  <!-- Mobile iOS stuff -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="{{ imago.settings('title', '') }}">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ imago.settings('feed_path', '') }}">
+
+</head>
+<body class="nojs">
+
+
+  <h1 class="title">
+    {{ imago.settings('title', '') }}
+  </h1>
+
+  <h2>{{ imago.get(page, 'headline', '') }}</h2>
+  <h3>{{ imago.get(page, 'title', '') }}</h3>
+  <p>{{ imago.get(page, 'description', '') }}</p>
+
+  {% if hasattr(page, 'assets') %}
+    <ul>
+      {% for asset in page.assets() %}
+      <li>
+        {% if asset.has_key('path') and asset.has_key('assets') %}
+            <a class="Collection"
+                data-uuid="{{ imago.get(asset, 'uuid') }}"
+                data-resolution="{{ imago.get(asset,'resolution') }}"
+                href="{{ imago.get(asset, 'path') }}"
+                title="{{ imago.get(asset, 'title') }}">
+
+                {{ imago.image.render(asset, 1200, 240) }}
+            <h2>{{ imago.get(asset, 'headline', '') }}</h2>
+            <h3>{{ imago.get(asset, 'title', '') }}</h3>
+            <p>{{ imago.get(asset, 'description', '') }}</p>
+
+            </a>
+        {% else %}
+          {{ imago.render(asset, 400, 400, highres=True, sizemode='crop' ) }}
+          <h2>{{ imago.get(asset, 'headline', '') }}</h2>
+          <h3>{{ imago.get(asset, 'title', '') }}</h3>
+          <p>{{ imago.get(asset, 'description', '') }}</p>
+        {% end %}
+      </li>
+
+      {% end %}
+    </ul>
+  {% else %}
+    {{ imago.render(page, 400, 400, highres=True, sizemode='crop' ) }}
+  {% end %}
+
+
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+  <script src="/application.js?{{ handler.settings.get('cacheflushcounter') }}" type="text/javascript"></script>
+  <script src="http://www.tommunro.com/static/lib/greensock/1.10/TweenMax.min.js" type="text/javascript"></script>
+  <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '{{ imago.settings("google_analytics") }}']);
+    _gaq.push(['_setDomainName', '{{ imago.settings("domain", "none") }}']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript';
+      ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
+      'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  <script type="text/javascript">
+    var jQuery  = require("jqueryify");
+    var exports = this;
+
+    jQuery(function(){
+      $("body").removeClass('nojs');
+      var App = require("index");
+      exports.app = new App({el: $("body")});
+    });
+
+  </script>
+
+</body>
+</html>
