@@ -4,13 +4,12 @@ Spine          = require('spine')
 Nex            = require('nex')
 
 Home           = require('controllers/home')
-Contact        = require('controllers/contact')
 
 Asset          = Nex.Models.Asset
 Setting        = Nex.Models.Setting
 
 Nex.debug      = window.location.host.indexOf(':') > 0
-Nex.tenant     = 'tommunro'
+Nex.tenant     = 'demo'
 
 Spine.Model.host = if Nex.debug then "http://#{Nex.tenant}.imagoapp.com/api/v2" else "/api/v2"
 
@@ -19,6 +18,9 @@ Spine.Model.host = if Nex.debug then "http://#{Nex.tenant}.imagoapp.com/api/v2" 
 class App extends Spine.Controller
 
   logPrefix: '(App) index: '
+
+  events:
+    'tap a' : 'onNavigate'
 
   constructor: ->
     super
@@ -96,10 +98,14 @@ class App extends Spine.Controller
     path = '/home' if path is '/'
     document.body.className = (path.replace(/\//g, ' ')).trim?()
 
+  onNavigate: (e) =>
+    href = $(e.target).closest('a').attr('href')
+    @navigate href if href and not href.match(/^http/)
+
   render: ->
     # selctions
     @append @home            = new Home
-    @append @contact         = new Contact
+    @append @contact         = new Nex.Contact
 
     @manager.add    \
       @home,        \
