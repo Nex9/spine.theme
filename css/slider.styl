@@ -1,0 +1,52 @@
+// effects
+.nexslider.slide
+  .slide
+    transition: all .25s
+    transform: translateX(-100%)
+    opacity: 0
+
+  .slide.active
+    transform: translateX(0)
+    opacity: 1
+    z-index: 1
+
+  .slide.active ~ .slide
+    transform: translateX(100%)
+
+.nexslider.carousel
+  .slide
+    transition: all 0.35s
+    transform: scale(0) translateX(-200%) rotateY(180deg)
+    opacity: 0
+
+  .slide.active
+    transform: scale(1) translateX(0) rotateY(0deg)
+    opacity: 1
+    z-index: 1
+
+  .slide.active ~ .slide
+    transform: scale(0) translateX(200%) rotateY(-180deg)
+
+.nexslider.slidescale
+  .slide
+    transition: all .25s
+    transform: scale(0) translateX(-100%)
+    opacity: 0
+
+  .slide.active
+    transform: scale(1) translateX(0)
+    opacity: 1
+    z-index: 1
+
+  .slide.activ ~ .slide
+    transform: scale(0) translateX(100%)
+
+.nexslider.fade
+  .slide
+    transition: opacity .25s
+    opacity: 0
+    z-index: 0
+
+  .slide.active
+    opacity: 1
+    z-index: 1

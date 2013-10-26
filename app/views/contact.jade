@@ -1,0 +1,23 @@
+form(action="/api/v2/contact")
+
+  div.nex.field
+    label(for="name") Name
+    input(type="text", name="name", id="name", required="true", placehoder="Name")
+
+  div.nex.field
+    label(for="email") Email
+    input(type="email", name="email", id="email", required="true", placehoder="email")
+
+  div.nex.field
+    label(for="message") Message
+    textarea(name="message", id="message", required="true", placehoder="your message")
+
+  div.nex.checkbox
+    input(type="checkbox", name="subscribe", id="subscribe", checked)
+    label(for="subscribe") Subscribe
+
+  div.formcontrols
+    button.send Send
+
+div.success
+  span Thank You
