@@ -25,8 +25,8 @@
         "nex/lib/models",
         "nex/lib/panel",
         "nex/lib/widgets",
-        "nex/lib/slider",
-        "nex/lib/html"
+        "nex/lib/page",
+        "nex/lib/contact"
       ],
       "paths"  : ["./app"],
       "target" : "./public/application.js",

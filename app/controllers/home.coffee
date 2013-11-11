@@ -1,6 +1,7 @@
 class Home extends Nex.Page
 
-  logPrefix: '(App) Home: '
+  logPrefix:
+    '(App) Home: '
 
   className:
     'home'

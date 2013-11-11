@@ -54,7 +54,7 @@ class App extends Spine.Controller
 
     @routes
       '/' : ->
-        @home.active('/fashion')
+        @home.active('/')
 
       # '/:lang/contact' : ->
       #   @contact.active('/contact')

@@ -16,6 +16,6 @@ require('nex/lib/utils')
 require('nex/lib/models')
 require('nex/lib/panel')
 require('nex/lib/widgets')
-require('nex/lib/slider')
-require('nex/lib/html')
+require('nex/lib/page')
+require('nex/lib/contact')
 
