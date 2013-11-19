@@ -1,6 +1,12 @@
 {$} = require('spine')
 
-$.support.touch = ('ontouchstart' of window)
+isTouchDevice = ->
+  el = document.createElement('div')
+  el.setAttribute('ongesturestart', 'return;')
+  return typeof el.ongesturestart is "function"
+
+# $.support.touch = ('ontouchstart' of window)
+$.support.touch = isTouchDevice()
 
 touch = {}
 
@@ -52,12 +58,7 @@ else
   $ ->
     $('body').bind 'click', (e) ->
       target = $(e.target)
-      e.preventDefault() unless target.attr('target') is '_blank' \
-        or target.attr('href')?.match(/^mailto/) \
-        or target.attr('href')?.match(/^http/) \
-        or target.attr('type')?.match(/checkbox/) \
-        or target.attr('type')?.match(/checkbox|text/) \
-        or target[0].nodeName.match(/LABEL/)
+      e.preventDefault() unless target.attr('target') is '_blank' or target.attr('href')?.match(/^mailto/) or target.attr('href')?.match(/^http/) or target.attr('type')?.match(/checkbox/) or target.attr('type')?.match(/checkbox|text/) or target[0].nodeName.match(/LABEL/)
       target.trigger('tap')
 
 types = ['swipe',
