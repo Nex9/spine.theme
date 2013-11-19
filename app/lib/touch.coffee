@@ -1,12 +1,7 @@
 {$} = require('spine')
 
-isTouchDevice = ->
-  el = document.createElement('div')
-  el.setAttribute('ongesturestart', 'return;')
-  return typeof el.ongesturestart is "function"
-
 # $.support.touch = ('ontouchstart' of window)
-$.support.touch = isTouchDevice()
+$.support.touch = !!navigator.userAgent.match(/iPad|iPhone|iPod/i)
 
 touch = {}
 
