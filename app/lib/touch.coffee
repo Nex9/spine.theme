@@ -48,7 +48,8 @@ $ ->
 
 if $.support.touch
   $('body').bind 'click', (e) ->
-    e.preventDefault()
+    target = $(e.target)
+    e.preventDefault() unless target.attr('target') is '_blank' or target.attr('href')?.match(/^mailto/) or target.attr('href')?.match(/^tel/) or target.attr('href')?.match(/^http/)
 else
   $ ->
     $('body').bind 'click', (e) ->
