@@ -8,12 +8,13 @@
   <link rel="icon" href="{{ imago.settings('icon') }}">
   <link rel="stylesheet" href="/application.css?{{ handler.settings.get('cacheflushcounter') }}" type="text/css">
 
-  <link href='//fonts.googleapis.com/css?family=Rationale' rel='stylesheet' type='text/css'>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Rationale' rel='stylesheet' type='text/css'> -->
 
-  <meta name="description" content="{{ imago.settings('description', '') }}">
-  <meta name="keywords"    content="{{ imago.settings('keywords', '') }}">
+  <meta name="description" content="{{ imago.get(page, 'description', imago.settings('description', ''))  }}">
+  <meta name="keywords"    content="{{ ', '.join(imago.get(page, 'tags', [])) or imago.settings('keywords', '') }}">
+
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
-  <meta name="viewport" content="user-scalable=no">
+  <!-- <meta name="viewport" content="user-scalable=no"> -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta http-equiv="cleartype" content="on">
@@ -22,7 +23,7 @@
   <meta property="og:image", content="{{ imago.settings('icon') }}=s256">
 
   <meta property="og:title", content="{{ imago.settings('title', '') }}">
-  <meta property="og:description" content="{{ imago.settings('description', '') }}">
+  <meta property="og:description" content="{{ imago.get(page, 'description', imago.settings('description', '')) }}">
   <meta property="og:url", content="//{{ imago.settings('domain', '') }}/">
 
   <!-- Mobile iOS stuff -->
@@ -69,7 +70,7 @@
 <body class="nojs">
 
     <h1 class="title">
-      <a href="http://{{ imago.settings('domain') }}">{{ imago.settings('title', '') }}</a>
+      <a href="/">{{ imago.settings('title', '') }}</a>
     </h1>
 
     {% set hl = imago.get(page, 'headline', '') %}
