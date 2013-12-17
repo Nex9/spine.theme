@@ -71,14 +71,6 @@
       <a href="/">{{ imago.settings('title', '') }}</a>
     </h1>
 
-    <nav>
-      <a href="/">Home</a>
-      <a href="/dresses">Shop</a>
-      <a href="http://jilljillstuart.tumblr.com" target="_blank">Blog</a>
-      <a href="/contact" target="_blank">Contact</a>
-      <a href="/stores">Store Locator</a>
-    </nav>
-
     {% set hl = imago.get(page, 'headline', '') %}
     {% set headline = hl if hl != '/' else 'home' %}
     <h2>{{ headline }}</h2>
