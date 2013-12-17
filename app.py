@@ -24,7 +24,7 @@ class Main(BaseHandler):
             return self.status(404, 'Collection Not Found')
 
         page = assetlookup.assetkey.get()
-        self.render('index.html', page = page)
+        self.render('online.html', page = page)
 
 
 
