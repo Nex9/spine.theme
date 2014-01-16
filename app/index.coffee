@@ -11,7 +11,7 @@ Setting        = Nex.Models.Setting
 Nex.debug      = window.location.host.indexOf(':') > 0
 Nex.tenant     = 'demo'
 
-Spine.Model.host = if Nex.debug then "http://#{Nex.tenant}.imagoapp.com/api/v2" else "/api/v2"
+Spine.Model.host = if (Nex.debug and Nex.data is 'online') then "http://#{Nex.tenant}.imagoapp.com/api/v2" else "/api/v2"
 
 
 
