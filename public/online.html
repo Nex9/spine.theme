@@ -99,7 +99,7 @@
               <h2>{{ imago.get(asset, 'headline', '') }}</h2>
               <h3>{{ imago.get(asset, 'title', '') }}</h3>
               <p>{{ imago.get(asset, 'description', '') }}</p>
-              <p>{{ imago.get(asset, 'html', '') }}</p>
+              {{ imago.get(asset, 'html', '') }}
               </a>
           {% else %}
             {%  if asset.get('kind') == 'Video' %}
@@ -113,7 +113,7 @@
             <h2>{{ imago.get(asset, 'headline', '') }}</h2>
             <h3>{{ imago.get(asset, 'title', '') }}</h3>
             <p>{{ imago.get(asset, 'description', '') }}</p>
-            <p>{{ imago.get(asset, 'html', '') }}</p>
+            {{ imago.get(asset, 'html', '') }}
 
           {% end %}
         </li>
@@ -125,7 +125,7 @@
       <h2>{{ imago.get(page, 'headline', '') }}</h2>
       <h3>{{ imago.get(page, 'title', '') }}</h3>
       <p>{{ imago.get(page, 'description', '') }}</p>
-      <p>{{ imago.get(page, 'html', '') }}</p>
+      {{ imago.get(page, 'html', '') }}
     {% end %}
 
 </body>
