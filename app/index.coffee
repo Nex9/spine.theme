@@ -32,7 +32,8 @@ class App extends Spine.Controller
 
     # bind window resize and scroll
     $(window).on 'scroll', @onScroll
-    $(window).on 'resize', @onResize
+    $(window).on 'resize', @onResizeStart
+    $(window).on 'resize', @onResizeStop
 
     Spine.Route.bind 'change', @setBodyClass
     Spine.Route.bind 'change', @setLanguage
@@ -74,9 +75,13 @@ class App extends Spine.Controller
     @isScrolling = true
     $(window).trigger 'scrollstart'
 
-  onResize: (e) =>
-    clearTimeout(@resizeTimeout) if @resizeTimeout
-    @resizeTimeout = setTimeout (=> $(window).trigger 'resizestop'), 200
+  onResizeStart: (e) =>
+    clearTimeout(@resizeStartTimeout) if @resizeStartTimeout
+    @resizeStartTimeout = setTimeout (=> $(window).trigger 'resizestart'), 100
+
+  onResizeStop: (e) =>
+    clearTimeout(@resizeStopTimeout) if @resizeStopTimeout
+    @resizeStopTimeout = setTimeout (=> $(window).trigger 'resizestop'), 200
 
   appReady: =>
     @log 'appReady'
