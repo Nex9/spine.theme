@@ -1,4 +1,5 @@
 require('lib/setup')
+_ = require('underscore')
 
 Spine          = require('spine')
 Nex            = require('nex')
@@ -31,9 +32,16 @@ class App extends Spine.Controller
     Spine.Route.on 'navigate', (url) => _gaq.push ['_trackPageview', "#{url}"] if _gaq and not Spine.debug
 
     # bind window resize and scroll
-    $(window).on 'scroll', @onScroll
-    $(window).on 'resize', @onResizeStart
-    $(window).on 'resize', @onResizeStop
+    @window = $(window)
+
+    @window.on 'resize', @onResizeStart
+    @window.on 'resize', _.debounce (=> @window.trigger 'resizestop'),  200
+    @window.on 'resize', _.throttle (=> @window.trigger 'resizelimit'), 150
+
+    @window.on 'scroll', @onScrollStart
+    @window.on 'scroll', _.debounce (=> @window.trigger 'scrollstop'),  200
+    @window.on 'scroll', _.throttle (=> @window.trigger 'scrolllimit'), 150
+
 
     Spine.Route.bind 'change', @setBodyClass
     Spine.Route.bind 'change', @setLanguage
@@ -65,23 +73,18 @@ class App extends Spine.Controller
 
     Setting.fetch()
 
-  onScroll: (e) =>
-    clearTimeout(@scrollTimeout) if @scrollTimeout
-    @scrollTimeout = setTimeout (=>
-      $(window).trigger 'scrollstop' if @isScrolling
-      @isScrolling = false
-    ), 50
-    return if @isScrolling
-    @isScrolling = true
-    $(window).trigger 'scrollstart'
-
   onResizeStart: (e) =>
-    clearTimeout(@resizeStartTimeout) if @resizeStartTimeout
-    @resizeStartTimeout = setTimeout (=> $(window).trigger 'resizestart'), 100
+    return if @resizeing
+    @window.trigger 'resizestart'
+    @resizeing = true
+    @window.one 'resizestop', => @resizeing = false
 
-  onResizeStop: (e) =>
-    clearTimeout(@resizeStopTimeout) if @resizeStopTimeout
-    @resizeStopTimeout = setTimeout (=> $(window).trigger 'resizestop'), 200
+  onScrollStart: (e) =>
+    return if @scrolling
+    @window.trigger 'scrollstart'
+    @scrolling = true
+    @window.one 'scrollstop', => @scrolling = false
+
 
   appReady: =>
     @log 'appReady'
@@ -93,8 +96,6 @@ class App extends Spine.Controller
 
     Spine.Route.setup options
 
-    # navigate to requested url
-    # @navigate(window.location.pathname)
 
   setLanguage: (Route, path) =>
     Nex.language = path?.match(/^\/([\w]{2})/i)?[1] or 'en'
