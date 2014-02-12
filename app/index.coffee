@@ -42,6 +42,9 @@ class App extends Spine.Controller
     @window.on 'scroll', _.debounce (=> @window.trigger 'scrollstop'),  200
     @window.on 'scroll', _.throttle (=> @window.trigger 'scrolllimit'), 150
 
+    @window.on 'mousewheel', @onMouseWheelStart
+    @window.on 'mousewheel', _.debounce (=> @window.trigger 'mousewheelstop'),  200
+    @window.on 'mousewheel', _.throttle (=> @window.trigger 'mousewheellimit'), 150
 
     Spine.Route.bind 'change', @setBodyClass
     Spine.Route.bind 'change', @setLanguage
@@ -85,6 +88,11 @@ class App extends Spine.Controller
     @scrolling = true
     @window.one 'scrollstop', => @scrolling = false
 
+  onMouseWheelStart: (e) =>
+    return if @isMouseWheeling
+    @window.trigger 'mousewheelstart'
+    @isMouseWheeling = true
+    @window.one 'mousewheelstop', => @isMouseWheeling = false
 
   appReady: =>
     @log 'appReady'
