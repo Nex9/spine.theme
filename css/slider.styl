@@ -38,7 +38,7 @@
     opacity: 1
     z-index: 1
 
-  .slide.activ ~ .slide
+  .slide.active ~ .slide
     transform: scale(0) translateX(100%)
 
 .nexslider.fade
@@ -50,3 +50,32 @@
   .slide.active
     opacity: 1
     z-index: 1
+
+.nexslider.scale
+  .slide
+    transition: all .25s
+    transform: scale(0)
+    opacity: 0
+
+  .slide.active
+    transform: scale(1)
+    opacity: 1
+    z-index: 1
+
+  .slide.active ~ .slide
+    transform: scale(0)
+
+.nexslider.scalerotate
+  .slide
+    transition: all .25s
+    transform: scale(0) rotateZ(-30deg)
+    opacity: 0
+
+  .slide.active
+    transform: scale(1) rotateZ(0)
+    opacity: 1
+    z-index: 1
+
+  .slide.active ~ .slide
+    transform: scale(0) rotateZ(30deg)
+    opacity: 0
