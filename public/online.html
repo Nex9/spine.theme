@@ -79,8 +79,9 @@
     <p>{{ imago.get(page, 'description', '') }}</p>
 
     {% if hasattr(page, 'assets') %}
+      {% set result, next, previous = handler.get_assets(page.path, asset_kind='all', page=pagenum) %}
       <ul>
-        {% for asset in page.assets() %}
+        {% for asset in result.assets %}
         <li>
           {% if asset.has_key('path') and asset.has_key('count') %}
               <a class="Collection"
@@ -118,9 +119,11 @@
 
           {% end %}
         </li>
-
         {% end %}
       </ul>
+      {% set nextlink, prevlink = handler.pagelinks(next=next, prev=previous) %}
+      {% if next %}<a href="{{ nextlink }}">next</p>{% end %}
+      {% if previous %}<a href="{{ prevlink }}">previous</p>{% end %}
     {% else %}
       <img src="{{ imago.get(page, 'serving_url') }}=s400" />
       <h2>{{ imago.get(page, 'headline', '') }}</h2>
