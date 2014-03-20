@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="/{{ handler.version }}/application.css" type="text/css">
 
   <meta name="description" content="{{ imago.get(page, 'description', imago.settings('description', ''))  }}">
-  <meta name="keywords"    content="{{ ', '.join(imago.get(page, 'tags', [])) or imago.settings('keywords', '') }}">
+  {% set site_keywords = imago.settings('keywords', '') + ', ' if imago.settings('keywords', '') else '' %}
+  <meta name="keywords" content="{{site_keywords + \
+                                ', '.join(imago.get(page, 'tags', []) + imago.get(page, 'category', [])) }}">
 
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
   <!-- <meta name="viewport" content="user-scalable=no"> -->
@@ -19,11 +21,12 @@
   <meta http-equiv="cleartype" content="on">
 
   <!-- Facebook sharing meta -->
-  <meta property="og:image", content="{{ imago.settings('icon') }}=s256">
-
-  <meta property="og:title", content="{{ imago.settings('title', '') }}">
+  <meta property="og:site_name" content="{{ imago.settings('title', '') }}"/>
+  <meta property="og:image", content="{{ imago.get(page, 'serving_url', imago.settings('icon')) }}=s256">
+  <meta property="og:title", content="{{ imago.get(page, 'name', '') }}">
   <meta property="og:description" content="{{ imago.get(page, 'description', imago.settings('description', '')) }}">
-  <meta property="og:url", content="//{{ imago.settings('domain', '') }}/">
+  <meta property="og:url", content="{{ handler.url }}/">
+  <meta property="og:type" content=""/>
 
   <!-- Mobile iOS stuff -->
   <meta name="apple-mobile-web-app-capable" content="yes">
