@@ -6,8 +6,11 @@
 
   <!-- a nex9.com site -->
 
+
   <link rel="icon" href="{{ imago.settings('icon') }}=s32">
   <link rel="stylesheet" href="/{{ handler.version }}/application.css" type="text/css">
+
+  <meta name="google-site-verification" content="{{ imago.settings('google_verify', '') }}" />
 
   <meta name="description" content="{{ imago.get(page, 'description', imago.settings('description', ''))  }}">
   {% set site_keywords = imago.settings('keywords', '') + ', ' if imago.settings('keywords', '') else '' %}
