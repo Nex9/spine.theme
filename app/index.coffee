@@ -121,9 +121,10 @@ class App extends Spine.Controller
     @append @home            = new Home
     @append @contact         = new Nex.Contact
 
-    @manager.add    \
-      @home,        \
+    @manager.add(
+      @home
       @contact
+    )
 
     # @delay =>
     #   @navigate '/de/products/system/venear'
