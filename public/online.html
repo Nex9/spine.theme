@@ -12,7 +12,7 @@
 
   <meta name="google-site-verification" content="{{ imago.settings('google_verify', '') }}" />
 
-  <meta name="description" content="{{ imago.get(page, 'description', imago.settings('description', ''))  }}">
+  <meta name="description" content="{{ imago.get(page, 'description') or imago.settings('description', '')  }}">
   {% set site_keywords = imago.settings('keywords', '') + ', ' if imago.settings('keywords', '') else '' %}
   <meta name="keywords" content="{{site_keywords + \
                                 ', '.join(imago.get(page, 'tags', []) + imago.get(page, 'category', [])) }}">
